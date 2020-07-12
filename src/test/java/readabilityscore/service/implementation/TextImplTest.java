@@ -1,4 +1,4 @@
-package readabilityscore.service;
+package readabilityscore.service.implementation;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
@@ -6,7 +6,6 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvFileSource;
-import readabilityscore.service.implementation.TextImpl;
 
 public class TextImplTest {
 
@@ -48,6 +47,14 @@ public class TextImplTest {
 
         int expected = 14;
         int actual = textImpl.counter(text, "[!//.//?]");
+        Assertions.assertEquals(expected, actual);
+    }
+
+    @ParameterizedTest(name = "{0} should give result: {1}")
+    @CsvFileSource(resources = "/words.csv")
+    @DisplayName("Should return appropriate number of vowels in word")
+    void shouldReturnAppropriateNumberOfVowels(String word, long expected){
+        long  actual = textImpl.getNumberOfVowels(word);
         Assertions.assertEquals(expected, actual);
     }
 }

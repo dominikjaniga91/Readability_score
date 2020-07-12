@@ -23,4 +23,11 @@ public class TextImpl implements Text {
     private boolean arrayIsEmpty(String[] array){
         return array.length == 1 && array[0].trim().equals("");
     }
+
+    protected long getNumberOfVowels(String word){
+        return word.chars()
+                    .mapToObj(Character::toString)
+                    .filter(vowel -> vowel.matches("[aeiouyAEIOUY]"))
+                    .count();
+    }
 }
