@@ -14,6 +14,13 @@ public class TextImpl implements Text {
 
     @Override
     public int counter(String text, String regexp) {
-        return text.split(regexp).length;
+        String[] elements = text.split(regexp);
+
+        return arrayIsEmpty(elements) ? 0
+                                      : elements.length;
+    }
+
+    private boolean arrayIsEmpty(String[] array){
+        return array.length == 1 && array[0].trim().equals("");
     }
 }
