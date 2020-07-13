@@ -92,4 +92,12 @@ public class TextImplTest {
         long  actual = textImpl.getNumberOfSyllables(text);
         Assertions.assertEquals(expected, actual);
     }
+
+    @Test
+    @DisplayName("Should return appropriate number of sentences in text")
+    void shouldReturnAppropriateNumberOfSentencesInText(){
+        long expected = 14;
+        long  actual = textImpl.counter(text, "[!//.//?]");
+        Assertions.assertEquals(expected, actual);
+    }
 }
