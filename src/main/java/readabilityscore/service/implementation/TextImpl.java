@@ -43,4 +43,10 @@ public class TextImpl implements Text {
                 .filter(word -> word.matches(".*[aeiouy][aeiouy].*"))
                 .count();
     }
+
+    protected long getNumberWordsEndsWithE(String[] words){
+        return Stream.of(words)
+                .filter(word -> word.endsWith("e"))
+                .count();
+    }
 }

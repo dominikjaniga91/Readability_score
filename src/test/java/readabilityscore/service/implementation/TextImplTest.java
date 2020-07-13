@@ -74,4 +74,13 @@ public class TextImplTest {
         long  actual = textImpl.getNumberWordsWithoutDoubledVowel(words);
         Assertions.assertEquals(expected, actual);
     }
+
+    @Test
+    @DisplayName("Should return appropriate number of words with doubled vowels")
+    void shouldReturnAppropriateNumberOfWordsEndsWithE(){
+        String[] words = text.split(" ");
+        long expected = 35;
+        long  actual = textImpl.getNumberWordsEndsWithE(words);
+        Assertions.assertEquals(expected, actual);
+    }
 }
