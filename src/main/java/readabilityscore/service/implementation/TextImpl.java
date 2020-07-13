@@ -1,6 +1,7 @@
 package readabilityscore.service.implementation;
 
 import readabilityscore.service.Text;
+import java.util.stream.Stream;
 
 public class TextImpl implements Text {
 
@@ -27,7 +28,13 @@ public class TextImpl implements Text {
     protected long getNumberOfVowels(String word){
         return word.chars()
                     .mapToObj(Character::toString)
-                    .filter(vowel -> vowel.matches("[aeiouyAEIOUY]"))
+                    .filter(s -> s.matches("[aeiouyAEIOUY]"))
+                    .count();
+    }
+
+    protected long getNumberWordsWithoutVowel(String[] words){
+        return Stream.of(words)
+                    .filter(word -> !word.matches(".*[aoeuiyAOEUIY].*"))
                     .count();
     }
 }
