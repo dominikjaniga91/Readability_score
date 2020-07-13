@@ -25,6 +25,21 @@ public class TextImpl implements Text {
         return array.length == 1 && array[0].trim().equals("");
     }
 
+    @Override
+    public long getNumberOfSyllables(String sentence){
+        String[] words = sentence.split(" ");
+        long syllables = 0;
+        for (String word : words) {
+            syllables += getNumberOfVowels(word);
+        }
+
+        syllables += getNumberWordsWithoutVowel(words);
+        syllables -= getNumberWordsWithoutDoubledVowel(words);
+        syllables -= getNumberWordsEndsWithE(words);
+
+        return syllables;
+    }
+
     protected long getNumberOfVowels(String word){
         return word.chars()
                     .mapToObj(Character::toString)
@@ -46,7 +61,7 @@ public class TextImpl implements Text {
 
     protected long getNumberWordsEndsWithE(String[] words){
         return Stream.of(words)
-                .filter(word -> word.endsWith("e"))
+                .filter(word -> word.matches(".*e"))
                 .count();
     }
 }

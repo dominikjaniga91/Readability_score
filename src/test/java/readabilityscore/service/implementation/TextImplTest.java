@@ -83,4 +83,12 @@ public class TextImplTest {
         long  actual = textImpl.getNumberWordsEndsWithE(words);
         Assertions.assertEquals(expected, actual);
     }
+
+    @Test
+    @DisplayName("Should return appropriate number of syllables in text")
+    void shouldReturnAppropriateNumberOfSyllablesInText(){
+        long expected = 210;
+        long  actual = textImpl.getNumberOfSyllables(text);
+        Assertions.assertEquals(expected, actual);
+    }
 }
