@@ -37,4 +37,10 @@ public class TextImpl implements Text {
                     .filter(word -> !word.matches(".*[aoeuiyAOEUIY].*"))
                     .count();
     }
+
+    protected long getNumberWordsWithoutDoubledVowel(String[] words){
+        return Stream.of(words)
+                .filter(word -> word.matches(".*[aeiouy][aeiouy].*"))
+                .count();
+    }
 }
