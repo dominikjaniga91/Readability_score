@@ -28,40 +28,28 @@ public class TextImpl implements Text {
     @Override
     public long getNumberOfSyllables(String sentence){
         String[] words = sentence.split(" ");
-        long syllables = 0;
-        for (String word : words) {
-            syllables += getNumberOfVowels(word);
-        }
 
-        syllables += getNumberWordsWithoutVowel(words);
-        syllables -= getNumberWordsWithoutDoubledVowel(words);
-        syllables -= getNumberWordsEndsWithE(words);
+        long numberOfVowels = getNumberOfVowels(words);
+        long wordsWithoutVowel = count(words, "[^aoeuiyAOEUIY]*");
+        long wordsWithDoubledVowel = count(words, ".*[aeiouy][aeiouy].*");
+        long wordsEndsWithE = count(words, ".*e");
 
-        return syllables;
+        return  numberOfVowels
+                + wordsWithoutVowel
+                - wordsWithDoubledVowel
+                - wordsEndsWithE;
     }
 
-    protected long getNumberOfVowels(String word){
-        return word.chars()
-                    .mapToObj(Character::toString)
-                    .filter(s -> s.matches("[aeiouyAEIOUY]"))
+    protected long getNumberOfVowels(String[] words){
+        return Stream.of(words).map(word -> word.chars()
+                                                .mapToObj(Character::toString)
+                                                .filter(s -> s.matches("[aeiouyAEIOUY]"))
+                                                .count()).reduce(0L, Long::sum);
+    }
+
+    protected long count(String[] words, String regexp){
+        return Stream.of(words)
+                    .filter(word -> word.matches(regexp))
                     .count();
-    }
-
-    protected long getNumberWordsWithoutVowel(String[] words){
-        return Stream.of(words)
-                    .filter(word -> !word.matches(".*[aoeuiyAOEUIY].*"))
-                    .count();
-    }
-
-    protected long getNumberWordsWithoutDoubledVowel(String[] words){
-        return Stream.of(words)
-                .filter(word -> word.matches(".*[aeiouy][aeiouy].*"))
-                .count();
-    }
-
-    protected long getNumberWordsEndsWithE(String[] words){
-        return Stream.of(words)
-                .filter(word -> word.matches(".*e"))
-                .count();
     }
 }

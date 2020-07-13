@@ -49,11 +49,12 @@ public class TextImplTest {
         Assertions.assertEquals(expected, actual);
     }
 
-    @ParameterizedTest(name = "{0} should give result: {1}")
-    @CsvFileSource(resources = "/words.csv")
+    @Test
     @DisplayName("Should return appropriate number of vowels in word")
-    void shouldReturnAppropriateNumberOfVowels(String word, long expected){
-        long  actual = textImpl.getNumberOfVowels(word);
+    void shouldReturnAppropriateNumberOfVowels(){
+        String[] words = text.split(" ");
+        long expected = 271;
+        long  actual = textImpl.getNumberOfVowels(words);
         Assertions.assertEquals(expected, actual);
     }
 
@@ -62,7 +63,7 @@ public class TextImplTest {
     void shouldReturnAppropriateNumberOfWordsWithoutVowel(){
         String[] words = text.split(" ");
         long expected = 1;
-        long actual = textImpl.getNumberWordsWithoutVowel(words);
+        long actual = textImpl.count(words, "[^aoeuiyAOEUIY]*");
         Assertions.assertEquals(expected, actual);
     }
 
@@ -71,7 +72,7 @@ public class TextImplTest {
     void shouldReturnAppropriateNumberOfWordsWithDoublesVowels(){
         String[] words = text.split(" ");
         long expected = 27;
-        long  actual = textImpl.getNumberWordsWithoutDoubledVowel(words);
+        long  actual = textImpl.count(words, ".*[aeiouy][aeiouy].*");
         Assertions.assertEquals(expected, actual);
     }
 
@@ -80,7 +81,7 @@ public class TextImplTest {
     void shouldReturnAppropriateNumberOfWordsEndsWithE(){
         String[] words = text.split(" ");
         long expected = 35;
-        long  actual = textImpl.getNumberWordsEndsWithE(words);
+        long  actual = textImpl.count(words, ".*e");
         Assertions.assertEquals(expected, actual);
     }
 
