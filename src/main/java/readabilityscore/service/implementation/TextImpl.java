@@ -41,16 +41,14 @@ public class TextImpl implements Text {
 
     @Override
     public long getNumberOfSyllables(String sentence){
-        String[] words = sentence.split(" ");
-        long syllables = 0;
-        for (String word : words) {
-            syllables += getNumberOfSyllablesInWord(word);
-        }
-        return syllables;
+        return Stream.of(sentence.split(" "))
+                    .map(this::getNumberOfSyllablesInWord)
+                    .reduce(0L, Long::sum);
+
     }
 
-    protected int getNumberOfSyllablesInWord(String word){
-        int number = 0;
+    protected long getNumberOfSyllablesInWord(String word){
+        long number = 0;
 
         if(containsSyllables(word)) {
             number += getNumberOfVowels(word);
