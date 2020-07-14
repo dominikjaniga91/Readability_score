@@ -31,4 +31,18 @@ public class ScoreCalculationImpl implements ScoreCalculation {
     private double calculateCL(){
         return 0.0588 * characters / words * 100 - 0.296 * sentences / words * 100 - 15.8;
     }
+
+    private int getAgeWhenIsPossibleToReadText(double score){
+        int intScore = (int) Math.round(score);
+
+        if(intScore == 2){
+            return 7;
+        } else if(intScore == 13){
+            return 24;
+        } else if(intScore > 13){
+            return 25;
+        } else {
+            return intScore + 6;
+        }
+    }
 }
