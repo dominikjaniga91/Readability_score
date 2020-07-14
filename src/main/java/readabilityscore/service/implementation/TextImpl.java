@@ -66,10 +66,7 @@ public class TextImpl implements Text {
     }
 
     private long getNumberOfVowels(String word){
-        return word.chars()
-                .mapToObj(Character::toString)
-                .filter(c -> c.matches("[aeiouyAEIOUY]"))
-                .count();
+        return word.replaceAll("[^aeiouyAEIOUY]", "").length();
     }
 
     private long containsDoubledSyllables(String word){
