@@ -27,7 +27,7 @@ public class ScoreCalculationImpl implements ScoreCalculation {
             case "ARI":{
                 score = calculateARI(data);
                 ageSum += age = getAgeWhenIsPossibleToReadText(score);
-                builder.append(message("Automated Readability Index", score, age));
+                builder.append(message("\nAutomated Readability Index", score, age));
                 if(!all){
                     break;
                 }
@@ -57,7 +57,7 @@ public class ScoreCalculationImpl implements ScoreCalculation {
                 }
             }
             default:{
-                builder.append(String.format("This text should be understood in average by %.2f year olds.%n", ageSum / 4d));
+                builder.append(String.format("\nThis text should be understood in average by %.2f year olds.%n", ageSum / 4d));
             }
         }
         return builder.toString();
