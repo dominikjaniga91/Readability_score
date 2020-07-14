@@ -7,9 +7,11 @@ import java.util.Scanner;
 
 public class ScoreCalculationImpl implements ScoreCalculation {
 
+    private final Scanner scanner = new Scanner(System.in);
+
+    @Override
     public String calculateReadabilityScore(TextData data){
 
-        Scanner scanner = new Scanner(System.in);
         System.out.print("Enter the score you want to calculate (ARI, FK, SMOG, CL, all): ");
         String calculationMethod = scanner.nextLine();
         StringBuilder builder = new StringBuilder();
