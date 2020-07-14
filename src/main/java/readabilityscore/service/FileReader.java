@@ -11,6 +11,8 @@ public class FileReader {
         String sentence = null;
         try{
             sentence = new String(Files.readAllBytes(Paths.get(path)));
+            System.out.println("The text is:");
+            System.out.println(sentence);
         }catch (IOException exception){
             System.out.println(exception.getLocalizedMessage());
         }
