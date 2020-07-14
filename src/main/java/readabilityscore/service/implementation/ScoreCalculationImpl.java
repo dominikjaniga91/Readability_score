@@ -5,6 +5,57 @@ import readabilityscore.service.TextData;
 
 public class ScoreCalculationImpl implements ScoreCalculation {
 
+    public String calculateReadabilityScore(TextData data, String calculationMethod){
+
+        StringBuilder builder = new StringBuilder();
+        boolean all = false;
+        double score;
+        int age;
+        int ageSum = 0;
+
+        switch (calculationMethod){
+            case "all":{
+                all = true;
+            }
+            case "ARI":{
+                score = calculateARI(data);
+                ageSum += age = getAgeWhenIsPossibleToReadText(score);
+                builder.append(message("Automated Readability Index", score, age));
+                if(!all){
+                    break;
+                }
+            }
+            case "FK":{
+                score = calculateFK(data);
+                ageSum += age = getAgeWhenIsPossibleToReadText(score);
+                builder.append(message("Flesch–Kincaid readability tests", score, age));
+                if(!all){
+                    break;
+                }
+            }
+            case "SMOG":{
+                score = calculateSMOG(data);
+                ageSum += age = getAgeWhenIsPossibleToReadText(score);
+                builder.append(message("Simple Measure of Gobbledygook", score, age));
+                if(!all){
+                    break;
+                }
+            }
+            case "CL":{
+                score = calculateCL(data);
+                ageSum += age = getAgeWhenIsPossibleToReadText(score);
+                builder.append(message("Coleman–Liau index", score, age));
+                if(!all){
+                    break;
+                }
+            }
+            default:{
+                builder.append(String.format("This text should be understood in average by %.2f year olds.%n", ageSum / 4d));
+            }
+        }
+        return builder.toString();
+    }
+
     private double calculateARI(TextData data){
         return 4.71 * data.getCharacters() / data.getWords() + 0.5 * data.getWords() / data.getSentences() - 21.43;
     }
