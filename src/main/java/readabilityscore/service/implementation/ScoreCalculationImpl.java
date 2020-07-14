@@ -3,10 +3,15 @@ package readabilityscore.service.implementation;
 import readabilityscore.service.ScoreCalculation;
 import readabilityscore.service.TextData;
 
+import java.util.Scanner;
+
 public class ScoreCalculationImpl implements ScoreCalculation {
 
-    public String calculateReadabilityScore(TextData data, String calculationMethod){
+    public String calculateReadabilityScore(TextData data){
 
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Enter the score you want to calculate (ARI, FK, SMOG, CL, all): ");
+        String calculationMethod = scanner.nextLine();
         StringBuilder builder = new StringBuilder();
         boolean all = false;
         double score;
