@@ -15,9 +15,6 @@ public class ScoreCalculationImpl implements ScoreCalculation {
     private final long words            = textImpl.counter(text, " ");
     private final long syllables        = textImpl.getNumberOfSyllables(text);
     private final long polysyllables    = textImpl.getNumberOfPolysyllables(text);
-    private final double L              = (double) characters / words * 100;
-    private final double S              = (double) sentences / words * 100;
-
 
     private double calculateARI(){
         return 4.71 * characters / words + 0.5 * words / sentences - 21.43;
@@ -29,5 +26,9 @@ public class ScoreCalculationImpl implements ScoreCalculation {
 
     private double calculateSMOG(){
         return 1.043 * Math.sqrt((double) polysyllables * 30 / sentences) + 3.1291;
+    }
+
+    private double calculateCL(){
+        return 0.0588 * characters / words * 100 - 0.296 * sentences / words * 100 - 15.8;
     }
 }
