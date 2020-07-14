@@ -52,8 +52,8 @@ public class TextImpl implements Text {
 
         if(containsSyllables(word)) {
             number += getNumberOfVowels(word);
-            number -= containsDoubledSyllables(word);
-            number -= endsWithE(word);
+            number -= getNumberOfDoubledSyllables(word);
+            number -= getNumberOfWordsEndsWithE(word);
 
         } else {
             number++;
@@ -69,11 +69,11 @@ public class TextImpl implements Text {
         return word.replaceAll("[^aeiouyAEIOUY]", "").length();
     }
 
-    private long containsDoubledSyllables(String word){
+    private long getNumberOfDoubledSyllables(String word){
         return word.matches(".*[aeiouy][aeiouy].*") ? 1 : 0;
     }
 
-    private long endsWithE(String word){
+    private long getNumberOfWordsEndsWithE(String word){
         return  word.endsWith("e") ? 1 : 0;
     }
 
