@@ -16,6 +16,12 @@ public class TextData {
         this.words              = textImpl.counter(text, " ");
         this.syllables          = textImpl.getNumberOfSyllables(text);
         this.polysyllables      = textImpl.getNumberOfPolysyllables(text);
+
+        System.out.println("Characters: " + characters);
+        System.out.println("Sentences: " + sentences);
+        System.out.println("Words: " + words);
+        System.out.println("Syllables: " + syllables);
+        System.out.println("Polysyllables: " + polysyllables);
     }
 
     public long getCharacters() {
