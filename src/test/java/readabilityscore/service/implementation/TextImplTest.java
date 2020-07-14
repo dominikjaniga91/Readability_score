@@ -100,4 +100,13 @@ public class TextImplTest {
         long  actual = textImpl.counter(text, "[!//.//?]");
         Assertions.assertEquals(expected, actual);
     }
+    
+
+    @Test
+    @DisplayName("Should return appropriate number of characters in text")
+    void shouldReturnAppropriateNumberOfCharactersInText(){
+        long expected = 687;
+        long  actual = textImpl.getNumberOfCharacters(text);
+        Assertions.assertEquals(expected, actual);
+    }
 }

@@ -26,6 +26,11 @@ public class TextImpl implements Text {
     }
 
     @Override
+    public int getNumberOfCharacters(String text) {
+        return text.replace(" ","").length();
+    }
+
+    @Override
     public long getNumberOfSyllables(String sentence){
         String[] words = sentence.split(" ");
 
