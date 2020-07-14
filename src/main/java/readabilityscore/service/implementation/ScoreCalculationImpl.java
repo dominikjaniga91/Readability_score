@@ -26,4 +26,8 @@ public class ScoreCalculationImpl implements ScoreCalculation {
     private double calculateFK(){
         return 0.39 * words / sentences + 11.8 * syllables / words - 15.59;
     }
+
+    private double calculateSMOG(){
+        return 1.043 * Math.sqrt((double) polysyllables * 30 / sentences) + 3.1291;
+    }
 }
