@@ -49,41 +49,14 @@ public class TextImplTest {
         Assertions.assertEquals(expected, actual);
     }
 
-    @Test
+    @ParameterizedTest(name = "{0} should give result: {1}")
+    @CsvFileSource(resources = "/words.csv")
     @DisplayName("Should return appropriate number of vowels in word")
-    void shouldReturnAppropriateNumberOfVowels(){
-        String[] words = text.split(" ");
-        long expected = 271;
-        long  actual = textImpl.getNumberOfVowels(words);
+    void shouldReturnAppropriateNumberOfVowels(String word, long expected){
+        long  actual = textImpl.getNumberOfSyllablesInWord(word);
         Assertions.assertEquals(expected, actual);
     }
 
-    @Test
-    @DisplayName("Should return appropriate number of words without vowel")
-    void shouldReturnAppropriateNumberOfWordsWithoutVowel(){
-        String[] words = text.split(" ");
-        long expected = 1;
-        long actual = textImpl.count(words, "[^aoeuiyAOEUIY]*");
-        Assertions.assertEquals(expected, actual);
-    }
-
-    @Test
-    @DisplayName("Should return appropriate number of words with doubled vowels")
-    void shouldReturnAppropriateNumberOfWordsWithDoublesVowels(){
-        String[] words = text.split(" ");
-        long expected = 27;
-        long  actual = textImpl.count(words, ".*[aeiouy][aeiouy].*");
-        Assertions.assertEquals(expected, actual);
-    }
-
-    @Test
-    @DisplayName("Should return appropriate number of words with doubled vowels")
-    void shouldReturnAppropriateNumberOfWordsEndsWithE(){
-        String[] words = text.split(" ");
-        long expected = 35;
-        long  actual = textImpl.count(words, ".*e");
-        Assertions.assertEquals(expected, actual);
-    }
 
     @Test
     @DisplayName("Should return appropriate number of syllables in text")
@@ -100,7 +73,7 @@ public class TextImplTest {
         long  actual = textImpl.counter(text, "[!//.//?]");
         Assertions.assertEquals(expected, actual);
     }
-    
+
 
     @Test
     @DisplayName("Should return appropriate number of characters in text")
