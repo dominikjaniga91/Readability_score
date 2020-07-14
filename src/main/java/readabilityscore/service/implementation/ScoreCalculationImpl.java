@@ -22,4 +22,8 @@ public class ScoreCalculationImpl implements ScoreCalculation {
     private double calculateARI(){
         return 4.71 * characters / words + 0.5 * words / sentences - 21.43;
     }
+
+    private double calculateFK(){
+        return 0.39 * words / sentences + 11.8 * syllables / words - 15.59;
+    }
 }
