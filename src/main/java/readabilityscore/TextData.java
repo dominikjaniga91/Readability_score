@@ -1,4 +1,4 @@
-package readabilityscore.service;
+package readabilityscore;
 
 import readabilityscore.service.implementation.TextImpl;
 

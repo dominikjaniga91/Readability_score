@@ -1,7 +1,7 @@
 package readabilityscore.service.implementation;
 
 import readabilityscore.service.ScoreCalculation;
-import readabilityscore.service.TextData;
+import readabilityscore.TextData;
 
 import java.util.Scanner;
 

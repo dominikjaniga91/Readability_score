@@ -1,7 +1,6 @@
 package readabilityscore;
 
 import readabilityscore.service.FileReader;
-import readabilityscore.service.TextData;
 import readabilityscore.service.implementation.ScoreCalculationImpl;
 import readabilityscore.service.implementation.TextImpl;
 
