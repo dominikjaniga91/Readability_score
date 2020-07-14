@@ -82,4 +82,12 @@ public class TextImplTest {
         long  actual = textImpl.getNumberOfCharacters(text);
         Assertions.assertEquals(expected, actual);
     }
+
+    @Test
+    @DisplayName("Should return appropriate number of polysyllables in text")
+    void shouldReturnAppropriateNumberOfPolysyllablesInText(){
+        long expected = 19;
+        long  actual = textImpl.getNumberOfPolysyllables(text);
+        Assertions.assertEquals(expected, actual);
+    }
 }

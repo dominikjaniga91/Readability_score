@@ -2,6 +2,8 @@ package readabilityscore.service.implementation;
 
 import readabilityscore.service.Text;
 
+import java.util.stream.Stream;
+
 public class TextImpl implements Text {
 
     /**
@@ -27,6 +29,14 @@ public class TextImpl implements Text {
     @Override
     public int getNumberOfCharacters(String text) {
         return text.replace(" ","").length();
+    }
+
+    @Override
+    public long getNumberOfPolysyllables(String sentence) {
+        String[] words = sentence.split(" ");
+        return Stream.of(words)
+                .filter(word -> getNumberOfSyllablesInWord(word) > 2)
+                .count();
     }
 
     @Override

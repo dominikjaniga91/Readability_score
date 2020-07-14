@@ -6,5 +6,7 @@ public interface Text {
 
     int getNumberOfCharacters(String text);
 
+    long getNumberOfPolysyllables(String sentence);
+
     long getNumberOfSyllables(String sentence);
 }
