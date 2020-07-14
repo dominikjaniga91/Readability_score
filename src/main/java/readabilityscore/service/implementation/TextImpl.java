@@ -1,7 +1,6 @@
 package readabilityscore.service.implementation;
 
 import readabilityscore.service.Text;
-import java.util.stream.Stream;
 
 public class TextImpl implements Text {
 
@@ -33,28 +32,45 @@ public class TextImpl implements Text {
     @Override
     public long getNumberOfSyllables(String sentence){
         String[] words = sentence.split(" ");
-
-        long numberOfVowels = getNumberOfVowels(words);
-        long wordsWithoutVowel = count(words, "[^aoeuiyAOEUIY]*");
-        long wordsWithDoubledVowel = count(words, ".*[aeiouy][aeiouy].*");
-        long wordsEndsWithE = count(words, ".*e");
-
-        return  numberOfVowels
-                + wordsWithoutVowel
-                - wordsWithDoubledVowel
-                - wordsEndsWithE;
+        long syllables = 0;
+        for (String word : words) {
+            syllables += getNumberOfSyllablesInWord(word);
+        }
+        return syllables;
     }
 
-    protected long getNumberOfVowels(String[] words){
-        return Stream.of(words).map(word -> word.chars()
-                                                .mapToObj(Character::toString)
-                                                .filter(s -> s.matches("[aeiouyAEIOUY]"))
-                                                .count()).reduce(0L, Long::sum);
+    protected int getNumberOfSyllablesInWord(String word){
+        int number = 0;
+
+        if(containsSyllables(word)) {
+            number += getNumberOfVowels(word);
+            number -= containsDoubledSyllables(word);
+            number -= endsWithE(word);
+
+        } else {
+            number++;
+        }
+        return number;
     }
 
-    protected long count(String[] words, String regexp){
-        return Stream.of(words)
-                    .filter(word -> word.matches(regexp))
-                    .count();
+    private boolean containsSyllables(String word){
+        return word.matches(".*[aoeuiyAOEUIY].*");
     }
+
+    private long getNumberOfVowels(String word){
+        return word.chars()
+                .mapToObj(Character::toString)
+                .filter(c -> c.matches("[aeiouyAEIOUY]"))
+                .count();
+    }
+
+    private long containsDoubledSyllables(String word){
+        return word.matches(".*[aeiouy][aeiouy].*") ? 1 : 0;
+    }
+
+    private long endsWithE(String word){
+        return  word.endsWith("e") ? 1 : 0;
+    }
+
+
 }
