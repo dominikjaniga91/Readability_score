@@ -45,4 +45,8 @@ public class ScoreCalculationImpl implements ScoreCalculation {
             return intScore + 6;
         }
     }
+
+    private String message(String calculationMethod, double score, int age){
+        return String.format("%s: %.2f (about %d year olds).%n" , calculationMethod, score, age);
+    }
 }
